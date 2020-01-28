@@ -38,11 +38,11 @@ Node* addNode(Node* parent) {
 * @param probability: probability of falling into a given node = 1/n. 
 * Where n is the number of branches/childrens of a given node
 */
-void probabilitySohn(Node* head, int probability) {
+void probabilitySon(Node* head, int probability) {
     int headSize = head->nodePointer.size();
     for (int i = 0; i < headSize; i++) {
 
-        probabilitySohn(head->nodePointer[i], probability / headSize);
+        probabilitySon(head->nodePointer[i], probability / headSize);
     }
     if (!headSize) head->probability = probability;         /**Leaf node */
     
@@ -58,7 +58,7 @@ int main()
     Node* quinto = addNode(cuarto);
     Node* sesto = addNode(head);
 
-    probabilitySohn(head, 100);
+    probabilitySon(head, 100);
     printf("%d\n", first->probability);
     printf("%d\n", second->probability);
     printf("%d\n", third->probability);
