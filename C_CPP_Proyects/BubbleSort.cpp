@@ -20,7 +20,10 @@ int main(int argc, char** argv) {
     //printf("%d\n", sizeof(array)/sizeof(array[0])); //C++ is an ugly bastard
 
     for(int x=0; x<sizeof(array)/sizeof(array[0]); x++){
-        if(x>0){
+        if(x>0 && array[x]<array[x-1]){
+            
+            //printf("Comparing %d to %d: ", array[x], array[x-1]);
+
             for(int y=x; y>0; y--){
                 if(array[y]<array[y-1]){
                     aux=array[y];
@@ -28,6 +31,8 @@ int main(int argc, char** argv) {
                     array[y-1]=aux;
                 }
             }
+
+            //printf(" %d, %d\n", array[x-1], array[x]);
         }
     }
 
