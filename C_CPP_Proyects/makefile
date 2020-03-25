@@ -1,4 +1,4 @@
-say_to:
+compile:
 	g++ -g -o Program.exe $(FILE)
 
 clean:
