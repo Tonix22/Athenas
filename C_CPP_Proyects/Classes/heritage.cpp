@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
+// TODO Missing 4th gen
 class Ancestral
 {
     public:
