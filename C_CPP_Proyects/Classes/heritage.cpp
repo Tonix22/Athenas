@@ -19,6 +19,9 @@ class Sohne: public Vater
     protected:
         string m_Name;
     public:
+        Sohne(){
+
+        };
         Sohne(const string& name)
             :m_Name(name){}
         string GetName() override {return m_Name;}
@@ -28,12 +31,22 @@ class Ren: public Sohne{
     protected:
         string saber;
     public:
+        Ren(){
+
+        };
         Ren(string const& sith);
         void SetName(string const& sith){m_Name=sith;}
         void lightSaber(string color);
 };
 Ren::Ren(string const& sith):Sohne(sith){};
 void Ren::lightSaber(string color){this->saber=color; cout << this -> saber << endl;}
+
+class knightsORen: Ren{
+//    this -> saber="red";
+    public:
+        knightsORen(string const& color);
+};
+//knightsORen::knightsORen(string const& color){}
 
 void printName(Vater* name){
     cout << name -> GetName() << endl;
