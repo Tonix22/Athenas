@@ -15,6 +15,7 @@
                                 }\
 
 using namespace std;
+#define RECIVE_BUFFER_SIZE 100
 class SerialPort
 {
     HANDLE hSerial;
@@ -28,7 +29,7 @@ class SerialPort
         }
         const TCHAR* COM = port.c_str();
         //hSerial = CreateFile(COM,GENERIC_READ | GENERIC_WRITE,0,0,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,0);
-        hSerial = CreateFile(COM,GENERIC_READ | GENERIC_WRITE,0,0,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,0);
+        hSerial = CreateFile(COM,GENERIC_READ | GENERIC_WRITE,0,0,OPEN_EXISTING,FILE_FLAG_OVERLAPPED,0);
         cout<<"serial ptr: "<<hSerial<<endl;
         if(hSerial==INVALID_HANDLE_VALUE)
         {
@@ -53,12 +54,12 @@ class SerialPort
             //error setting serial port state
         }
 
-        COMMTIMEOUTS timeouts={0};
-        timeouts.ReadIntervalTimeout=1;
-        timeouts.ReadTotalTimeoutConstant=1;
-        timeouts.ReadTotalTimeoutMultiplier=1;
-        timeouts.WriteTotalTimeoutConstant=1;
-        timeouts.WriteTotalTimeoutMultiplier=1;
+        COMMTIMEOUTS timeouts;
+        timeouts.ReadIntervalTimeout=MAXDWORD;
+        timeouts.ReadTotalTimeoutMultiplier=0;
+        timeouts.ReadTotalTimeoutConstant=0;
+        timeouts.WriteTotalTimeoutConstant=0;
+        timeouts.WriteTotalTimeoutMultiplier=0;
         if(!SetCommTimeouts(hSerial, &timeouts))
         {
             std::cout << "set timeout error" << std::endl;
@@ -68,10 +69,19 @@ class SerialPort
     {
         DCB dcb; 
         int retVal;
-        BYTE Byte[100]; 
+        BYTE Byte[RECIVE_BUFFER_SIZE]; 
         DWORD dwBytesTransferred;
         DWORD dwCommModemStatus;
-        memset(Byte,0,100);
+        
+        OVERLAPPED ov;
+        OVERLAPPED rx;
+        memset(&ov,0,sizeof(ov));
+        ov.hEvent = CreateEvent( 0,true,0,0);
+        
+        memcpy(&rx,&ov,sizeof(rx));
+
+        memset(Byte,0,RECIVE_BUFFER_SIZE);
+
         if (!GetCommState(hSerial,&dcb))
         {
             cout<<"COM state NOT OK "<<endl;
@@ -86,30 +96,30 @@ class SerialPort
             cout<<"CON SET NOT OK"<<endl;
             return 0x100; 
         }
-        SetCommMask (hSerial, EV_RXCHAR | EV_ERR); //receive character event 
-        WaitCommEvent (hSerial, &dwCommModemStatus, 0); //wait for character
-
+        
+        SetCommMask (hSerial, EV_RXCHAR |EV_ERR); //receive character event 
+        WaitCommEvent (hSerial, &dwCommModemStatus, &ov); //wait for character
+        
         if (dwCommModemStatus & EV_RXCHAR) 
         {
-            ReadFile (hSerial, &Byte, 100, &dwBytesTransferred, 0); //read 1 
+            ReadFile (hSerial, &Byte, RECIVE_BUFFER_SIZE, &dwBytesTransferred, &rx); //read 1 
+            printf("%s\r\n",Byte);
         }
         else if (dwCommModemStatus & EV_ERR) 
         {
             retVal = 0x101; 
         }
-        //retVal = Byte; 
-        printf("byte: %s\r\n",Byte);
+       
         return retVal;
     }
     bool write_string(string& message)
     {
+        OVERLAPPED tx;
         DWORD dwBytesRead = 0;
         DWORD read = 0;
-        bool status = WriteFile(hSerial, message.c_str(), message.size(), &dwBytesRead, NULL);
-        if(status == false)
-        {
-            std::cout << "write error" << std::endl;
-        }
+        memset(&tx,0,sizeof(tx));
+        tx.hEvent = CreateEvent( 0,true,0,0);
+        bool status = WriteFile(hSerial, message.c_str(), message.size(), &dwBytesRead, &tx);
         return status;
     }
     ~SerialPort()
