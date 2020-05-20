@@ -52,7 +52,7 @@ void print_spiral_matrix(char** matrix,int x_size,int y_size){
     
     */
 
-void printx(int** matrix, int x_start,int x_end, int y_col)
+void printx(int matrix[][3], int x_start,int x_end, int y_col)
 {
     if(x_start > x_end)
     {
@@ -70,7 +70,7 @@ void printx(int** matrix, int x_start,int x_end, int y_col)
     }
     
 }
-void printy(int** matrix, int y_start, int y_end, int x_row)
+void printy(int matrix[][3], int y_start, int y_end, int x_row)
 {
     if(y_start > y_end){
         for(int y = y_start; y <= y_end; y--)
@@ -84,15 +84,16 @@ void printy(int** matrix, int y_start, int y_end, int x_row)
         {
             printf("%d",matrix[x_row][y]);
         }
-    }  
+    }
+    
 }
-void spiral(int** matrix)
+void spiral(int array[][3])
 {
-    printx(matrix, 0, 2, 0);
-    printy(matrix, 1, 2, 2);
-    printx(matrix, 1, 0, 1);
-    printy(matrix, 0, 0, 1);
-    printx(matrix, 1, 1, 1);
+    printx(array, 0, 2, 0);
+    printy(array, 1, 2, 2);
+    printx(array, 1, 0, 1);
+    printy(array, 0, 0, 1);
+    printx(array, 1, 1, 1);
 }
 /*int 
 func(imprimirint x, int inicio, int final)
@@ -112,59 +113,91 @@ printy()
 
 */
 
-
-void luigisAttempt(int** matrix){
+/*************************************************************************/
+string luigisAttempt(int** matrix){
     
     //Anyway, this a way to auto get x and y
-    int x = sizeof(matrix[0])/sizeof(matrix[0][0]); // ... how the fuck do I do this? 	ლ(¯ロ¯"ლ)
-    int y = sizeof(matrix)/sizeof(matrix[0]);
+    int xSize = sizeof(matrix[0])/sizeof(matrix[0][0]); // ... how the fuck do I do this? 	ლ(¯ロ¯"ლ)
+    int ySize = sizeof(matrix)/sizeof(matrix[0]);
 
-    int pos = 0;
-    bool dir = true; //Whether I am i
+    int posx = 0;
+    int posy = 0;
+    bool dir = true; //Whether I am moving on X or Y
+
+    string output="";
 
     do{
-        luigisFunc();
-    }while(x < x/2 && y < y/2);
+        if(dir && posx < xSize){
+
+            for(int i=posx; i <= xSize; i++){
+                
+                output += matrix[posy][i];
+
+            }
+
+            dir = !dir;
+            
+        }
+        else if(dir && posx >= xSize){
+
+            for(int i=posx; i >= xSize-posx; i--){
+                            
+                output += matrix[posy][i];
+
+            }
+
+            dir = !dir;
+
+        }
+    }while(posx < xSize/2 && posy < ySize/2);
     
+    return output;
+
 }
-string luigisFunc(int** matrix, int start, int final, bool xDirection){
+/*
+string luigisFunc(int** matrix, int x, int y, bool direction){
     
     string output = "";
     
-    if(){
+    if(direction && start<final){
         for(int i=start; start<=final; start++){
-            string += matrix[];
+            //string += matrix[];
         }
+    }else if(direction && start>final){
+        
     }else{
         
     }
     
     return output;
 }
+*/
+/*************************************************************************/
 
+/*************************************************************************/
 int main(int argc, char const *argv[])
 {
-    int matrix[3][3]=
+    int matrix[][3]=
     {
         {1,2,3},//matrix[0]  sizeof =  3
         {4,5,6},//matrix[1]
         {7,8,9},//matrix[2]
     };
     int size_of_matrix = sizeof(matrix)/sizeof(int);
-    int rect[2][3]=
+    int rect[][3]=
     {
         {1,2,3},
         {4,5,6},
     };//1,2,3,6,5,4
-    int fourbyfoour[4][4]=
+    int fourbyfoour[][4]=
     {
         {0,4,8, 12 },
         {1,5,9, 13 },
         {2,6,10,14 },
         {3,7,11,15 },
     };
-
-    spiral(*matrix);
+    spiral(matrix);
     
     return 0;
 }
+/*************************************************************************/
