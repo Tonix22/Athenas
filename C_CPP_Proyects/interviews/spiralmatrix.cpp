@@ -143,13 +143,37 @@ string luigisAttempt(int** matrix){
             for(int i=posx; i >= xSize-posx; i--){
                             
                 output += matrix[posy][i];
+                xSize-=1;
 
             }
 
             dir = !dir;
 
         }
-    }while(posx < xSize/2 && posy < ySize/2);
+        else if(dir && posy < ySize){
+
+            for(int i=posy; i <= ySize; i++){
+                
+                output += matrix[i][posx];
+
+            }
+
+            dir = !dir;
+            
+        }
+        else if(dir && posy >= ySize){
+
+            for(int i=posy; i > ySize-posy; i--){
+                            
+                output += matrix[i][posx];
+                ySize-=1;
+
+            }
+
+            dir = !dir;
+
+        }
+    }while(posx < xSize/2 && posy < ySize/2); //el DoWhile elimina la necesidad de hacer <=
     
     return output;
 
@@ -197,6 +221,9 @@ int main(int argc, char const *argv[])
         {3,7,11,15 },
     };
     spiral(matrix);
+
+    //Luigi's Attempt
+    printf("%s", luigisAttempt(fourbyfoour**));
     
     return 0;
 }
