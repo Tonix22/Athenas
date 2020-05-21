@@ -1,5 +1,6 @@
 
-#include <bits/stdc++.h> 
+#include <bits/stdc++.h>
+#include <stack>
 using namespace std;
 
 #ifdef Test0
@@ -23,45 +24,59 @@ void spiralPrint(int row, int col, int a[R][C])
     //iterators
     int i = 0;
     int j = 0;
-    int k = 0;
+    int k = -1;
     int l = 0;
+    stack<int> invert;
 
     int limit_col = 0;
     int limit_row = 0;
-
     do
     {
-        for ( i = (k+limit_col) ; i < (col-limit_col); ++i)
+        for(i = (k+1); i < (col-limit_col); i++)
         {
             cout<<a[l][i]<<",";
+            invert.push(a[l][i]);
         }
         i--;
-        for(j = l+1; j < (row-limit_row); j++)
+        for(j = (l+1); j < (row-limit_row) ; j++)
         {
-            cout<<a[j][i]<<",";
+            cout << a[j][i] << ",";
+            invert.push(a[j][i]);
         }
         j--;
-        if(j != l)
+        if( l!=j )
         {
-            for(k=i-1; k >= limit_col; k--)
+            for ( k = i-1 ; k >=limit_col ; k--)
             {
-                cout<<a[j][k]<<",";
+                cout << a[j][k] << ",";
+                invert.push(a[j][k]);
             }
-            k++;
-            limit_col++;
+            k++;///k = 0
 
-            for(l=j-1; l > limit_row; l--)
+            for(l = j-1 ; l >= limit_row + 1  ;l--)
             {
-                cout<<a[l][k]<<",";
+                cout<< a[l][k] << ",";
+                invert.push( a[l][k]);
             }
-            limit_row++;
             l++;
+            limit_col++;
+            limit_row++;
         }
-    }while(j != l);
+
+    }while( l!=j );
+
+    cout<<endl<<"spiral inversa"<<endl;
+    do
+    {
+        cout<<invert.top()<<",";//tomar el ultimo disco y anotarlo
+        invert.pop();//sacarlo del tubo
+    }while(!invert.empty());
+
 }
 
 int main(int argc, char const *argv[])
 {
+    
     #ifdef Test0
     int a[R][C]=
     {
