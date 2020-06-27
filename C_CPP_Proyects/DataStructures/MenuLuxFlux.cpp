@@ -5,9 +5,15 @@ struct Node
 {
     void (*foo)();
     Node* next;
-    Node& operator++()
+};
+
+class DispMenu
+{
+    public:
+    Node* screen;
+    DispMenu& operator++(int)
     {
-        *this = *(this->next);
+        screen = screen->next;
         return *this;
     }
 };
@@ -20,9 +26,6 @@ void leve_func();
 void wifi_func();
 void sync_func();
 
-Node* Rooth = NULL;
-Node* END   = NULL; // helper pointer
-Node* aux   = NULL;
 
 typedef enum{
     IDLE,
@@ -32,17 +35,16 @@ typedef enum{
     WIFI,
     SYNC,
     ARRAYSIZE,
-}Menu_t;
+}Screen_t;
 
 
-Node menu[ARRAYSIZE] = {{idle_func,&(menu[RITH])},
-                        {rith_func,&(menu[CIRC])},
-                        {circ_func,&(menu[LEVEL])},
-                        {leve_func,&(menu[WIFI])}, 
-                        {wifi_func,&(menu[SYNC])},
-                        {sync_func,&(menu[IDLE])},
-
-                       };
+Node screens[ARRAYSIZE] = { {idle_func,&(screens[RITH]) },
+                            {rith_func,&(screens[CIRC]) },
+                            {circ_func,&(screens[LEVEL])},
+                            {leve_func,&(screens[WIFI]) }, 
+                            {wifi_func,&(screens[SYNC]) },
+                            {sync_func,&(screens[IDLE]) },
+                          };
 
 
 void idle_func(){
@@ -70,30 +72,17 @@ void sync_func(){
 }
 
 
-
 int main(int argc, char const *argv[])
 {
-    Node* curr_screen = &(menu[IDLE]);
-    curr_screen->foo();
-    curr_screen++;
+    DispMenu Menu;
+    Menu.screen =  &(screens[IDLE]);
 
-    curr_screen->foo();
-    curr_screen++;
-     
-    curr_screen->foo();
-    curr_screen++;
-
-     curr_screen->foo(); 
-    curr_screen++;   
-
-    curr_screen->foo();
-    curr_screen++;
-
-    curr_screen->foo();
-    curr_screen++;
-
-    curr_screen->foo();
-    curr_screen++;
+    for(int i=0; i< ARRAYSIZE +1 ;i++)
+    {
+        Menu.screen->foo();
+        Menu++;
+    }     
+   
 
     return 0;
 }
