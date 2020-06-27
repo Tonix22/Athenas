@@ -1,32 +1,8 @@
 #include <iostream>
 using namespace std;
 
-struct Node
-{
-    void (*foo)();
-    Node* next;
-};
-
-class DispMenu
-{
-    public:
-    Node* screen;
-    DispMenu& operator++(int)
-    {
-        screen = screen->next;
-        return *this;
-    }
-};
-
-//Prototypes
-void idle_func();
-void rith_func();
-void circ_func();
-void leve_func();
-void wifi_func();
-void sync_func();
-
-
+//Definitions
+typedef void (*foo_ptr)();
 typedef enum{
     IDLE,
     RITH,
@@ -37,16 +13,54 @@ typedef enum{
     ARRAYSIZE,
 }Screen_t;
 
+//Prototypes
+void idle_func();
+void rith_func();
+void circ_func();
+void leve_func();
+void wifi_func();
+void sync_func();
 
-Node screens[ARRAYSIZE] = { {idle_func,&(screens[RITH]) },
-                            {rith_func,&(screens[CIRC]) },
-                            {circ_func,&(screens[LEVEL])},
-                            {leve_func,&(screens[WIFI]) }, 
-                            {wifi_func,&(screens[SYNC]) },
-                            {sync_func,&(screens[IDLE]) },
-                          };
+template <typename T> 
+struct Node
+{
+    T val;
+    Node* next;
+};
 
+//class declaration
+class DispMenu
+{
+    Node<foo_ptr> screens[ARRAYSIZE] = 
+                        { 
+                            {idle_func,&(screens[RITH] ) },
+                            {rith_func,&(screens[CIRC] ) },
+                            {circ_func,&(screens[LEVEL]) },
+                            {leve_func,&(screens[WIFI] ) }, 
+                            {wifi_func,&(screens[IDLE] ) },
+                            {sync_func,&(screens[IDLE] ) },
+                        };
+    Node<foo_ptr>* screen = &(screens[IDLE]);
 
+    public:
+    DispMenu& operator++(int)
+    {
+        screen = screen->next;
+        return *this;
+    }
+    //a way to acces to a function by index
+    void operator[](std::size_t idx)
+    {
+        this->screen = &(screens[idx]);//update screen
+        screens[idx].val(); //go to screen
+    }
+    void operator ( ) () // Menu()
+    {
+        this->screen->val();
+    }
+};
+
+// functions
 void idle_func(){
     cout<<"idle_func"<<endl;
 }
@@ -75,14 +89,21 @@ void sync_func(){
 int main(int argc, char const *argv[])
 {
     DispMenu Menu;
-    Menu.screen =  &(screens[IDLE]);
 
-    for(int i=0; i< ARRAYSIZE +1 ;i++)
+    /* 
+    This is a way to acces menu directly by index, 
+    used to branch to a specific menu function. 
+    For example when a button is pressed by 3
+    seconds, the fucntion call will be directly like this.
+    */
+    //Menu[SYNC];// Acces directly to function
+
+
+    for(int i=0; i< ARRAYSIZE +3 ;i++)
     {
-        Menu.screen->foo();
-        Menu++;
+        Menu(); // Jump to function like this
+        Menu++; // Incremt position like this
     }     
    
-
     return 0;
 }
