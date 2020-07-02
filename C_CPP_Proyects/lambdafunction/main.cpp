@@ -1,4 +1,4 @@
-
+     
 #include <iostream>
 #include <vector>//holi :3 owo xD ( ͡° ͜ʖ ͡°) (´・ω・`)
 #include <algorithm> //Funciones locas
