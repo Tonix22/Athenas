@@ -11,6 +11,26 @@
 #include <unistd.h>
 using namespace std;
 
+void func()
+{
+    int a;
+    a = 3;
+}
+//int* val;
+//val = 3;
+//func_pointer(val);
+//copiar val a b
+//copia a (a) b
+//2N espacio de memoria desperdiciado
+// pesa 200MB --> [400MB = pura basura]
+// 1GB --> 2GB en basura
+
+
+void func_pointer(int b)
+{
+    int a = b;
+}
+
 
 void ForEach (vector<int>& values, void(*func)(int))
 {
