@@ -15,13 +15,6 @@ class MyStack
     {
 
     }
-<<<<<<< HEAD
-=======
-    void get_max()
-    {
-        
-    }
->>>>>>> 50de8e8e72840a30b2000d799dee8c6d1cc36e2d
     private:
     stack<int> element;
     struct MaxWithCount
