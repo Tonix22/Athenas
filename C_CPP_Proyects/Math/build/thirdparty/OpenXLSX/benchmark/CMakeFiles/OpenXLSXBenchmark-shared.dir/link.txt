@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/OpenXLSXBenchmark-shared.dir/Benchmark.cpp.o -o ../../../output/OpenXLSXBenchmark-shared  -Wl,-rpath,/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/output ../../../output/libbenchmark.a ../../../output/libbenchmark_main.a ../../../output/libOpenXLSX-shared.so ../../../output/libbenchmark.a -pthread /usr/lib/x86_64-linux-gnu/librt.so 

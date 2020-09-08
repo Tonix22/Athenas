@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/_deps/gbench-subbuild/CMakeFiles/gbench-populate"
+		},
+		{
+			"file" : "/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/_deps/gbench-subbuild/CMakeFiles/gbench-populate.rule"
+		},
+		{
+			"file" : "/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/_deps/gbench-subbuild/CMakeFiles/gbench-populate-complete.rule"
+		},
+		{
+			"file" : "/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/_deps/gbench-subbuild/gbench-populate-prefix/src/gbench-populate-stamp/gbench-populate-install.rule"
+		},
+		{
+			"file" : "/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/_deps/gbench-subbuild/gbench-populate-prefix/src/gbench-populate-stamp/gbench-populate-mkdir.rule"
+		},
+		{
+			"file" : "/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/_deps/gbench-subbuild/gbench-populate-prefix/src/gbench-populate-stamp/gbench-populate-download.rule"
+		},
+		{
+			"file" : "/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/_deps/gbench-subbuild/gbench-populate-prefix/src/gbench-populate-stamp/gbench-populate-update.rule"
+		},
+		{
+			"file" : "/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/_deps/gbench-subbuild/gbench-populate-prefix/src/gbench-populate-stamp/gbench-populate-patch.rule"
+		},
+		{
+			"file" : "/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/_deps/gbench-subbuild/gbench-populate-prefix/src/gbench-populate-stamp/gbench-populate-configure.rule"
+		},
+		{
+			"file" : "/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/_deps/gbench-subbuild/gbench-populate-prefix/src/gbench-populate-stamp/gbench-populate-build.rule"
+		},
+		{
+			"file" : "/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/_deps/gbench-subbuild/gbench-populate-prefix/src/gbench-populate-stamp/gbench-populate-test.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"gbench-populate"
+		],
+		"name" : "gbench-populate"
+	}
+}
