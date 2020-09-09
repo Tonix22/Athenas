@@ -50,7 +50,7 @@
 
   Below, define some extra web colours useful in graphs
 */
-
+/*
 const int CRIMSON           = COLOR(220, 20, 60);
 const int CHOCOLATE         = COLOR(210, 105, 30);
 const int GOLDENROD         = COLOR(218, 165, 32);
@@ -67,7 +67,7 @@ const int DARKGREEN         = COLOR(0, 100, 0);
 const int MEDIUMBLUE        = COLOR(0, 0, 205);
 const int BLUEBLUE          = COLOR(0, 0, 255);
 const int DODGERBLUE        = COLOR(30, 144, 255);
-
+*/
 /* -------------------------------------------------------- */
 
 /**

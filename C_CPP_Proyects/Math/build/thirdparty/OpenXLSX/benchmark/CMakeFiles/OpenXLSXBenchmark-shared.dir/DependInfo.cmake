@@ -12,6 +12,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../include"
   "../thirdparty/koolplot"
+  "/usr/include/python3.6"
   "_deps/gbench-src/src/../include"
   "../thirdparty/OpenXLSX/library"
   "../thirdparty/OpenXLSX/library/headers"

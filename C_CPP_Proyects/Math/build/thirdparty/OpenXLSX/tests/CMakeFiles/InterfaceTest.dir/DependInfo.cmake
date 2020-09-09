@@ -18,6 +18,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../include"
   "../thirdparty/koolplot"
+  "/usr/include/python3.6"
   "thirdparty/OpenXLSX/tests/_deps/Catch2"
   )
 

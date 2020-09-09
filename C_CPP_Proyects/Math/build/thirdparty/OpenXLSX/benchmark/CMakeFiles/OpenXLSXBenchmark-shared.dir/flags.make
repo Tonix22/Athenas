@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/include -I/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/thirdparty/koolplot -I/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/_deps/gbench-src/src/../include -I/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/thirdparty/OpenXLSX/library -I/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/thirdparty/OpenXLSX/library/headers -I/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/thirdparty/OpenXLSX/library
+CXX_INCLUDES = -I/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/include -I/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/thirdparty/koolplot -I/usr/include/python3.6 -I/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/_deps/gbench-src/src/../include -I/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/thirdparty/OpenXLSX/library -I/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/thirdparty/OpenXLSX/library/headers -I/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/thirdparty/OpenXLSX/library
 
 CXX_FLAGS = -fvisibility=hidden -fvisibility-inlines-hidden -std=c++1z
 

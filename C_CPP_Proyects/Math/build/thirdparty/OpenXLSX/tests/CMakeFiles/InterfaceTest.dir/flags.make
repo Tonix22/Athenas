@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/include -I/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/thirdparty/koolplot -isystem /home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/thirdparty/OpenXLSX/tests/_deps/Catch2
+CXX_INCLUDES = -I/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/include -I/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/thirdparty/koolplot -I/usr/include/python3.6 -isystem /home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/thirdparty/OpenXLSX/tests/_deps/Catch2
 
 CXX_FLAGS = -fvisibility=hidden -fvisibility-inlines-hidden -std=c++1z
 

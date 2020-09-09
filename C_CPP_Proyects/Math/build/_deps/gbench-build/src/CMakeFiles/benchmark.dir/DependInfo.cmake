@@ -36,6 +36,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../include"
   "../thirdparty/koolplot"
+  "/usr/include/python3.6"
   "_deps/gbench-src/include"
   "_deps/gbench-src/src"
   "_deps/gbench-src/src/../include"

@@ -2,23 +2,30 @@
 #include <iostream>
 #include <stdio.h>
 #include <cmath> // math.h
+#include <vector>
 #include "lagrange.h"
-#include "koolplot.h"
+#include "matplotlibcpp.h"
 
 using namespace std;
 using namespace OpenXLSX;
+namespace plt = matplotlibcpp;
 
-float stimes[4] = {0*SAMPLE_TIME, 1*SAMPLE_TIME, 2*SAMPLE_TIME, 3*SAMPLE_TIME};
-float Acel[4];
+float stimes[DATA_BUFER] = {0*SAMPLE_TIME, 1*SAMPLE_TIME, 2*SAMPLE_TIME};
+float Acel[DATA_BUFER];
 
 Acel_eq acel_vect {0,0,0,0};
 Vel_eq  vel_vect  {0,0,0,0,0};
 Pos_eq  pos_vect  {0,0,0,0,0,0};
 float   last_acel = 0;
+vector<double> velocity_plot;
+vector<double> position_plot;
+vector<double> time_axis;
+float time_marks = 0;
+int simpsons_factors[]= {1,3,3,1};
+
 
 void Calculate_polynomial(void)
 {
-
     float dividend;
     float diff;
     float mul;
@@ -44,7 +51,7 @@ void Calculate_polynomial(void)
 
         acel_vect.A += rate;
         acel_vect.B += rate * diff;
-        acel_vect.offset += rate * mul;
+        // acel_vect.offset += rate * mul;
         
         if(i<(DATA_BUFER-1))
         {
@@ -58,6 +65,7 @@ void Calculate_polynomial(void)
         temp*= -1;
         acel_vect.C += (temp*rate);
     }
+    acel_vect.offset = Acel[0];
 }
 void integrate_accel(void)
 {
@@ -96,55 +104,60 @@ void integrate_vel(void)
 
 void Process_data(void)
 {
-    printf("input data: \r\n");
-    for(int i=0;i<DATA_BUFER;i++)
-    {
-        printf("(%.3f,%.3f)\r\n",stimes[i],Acel[i]);
-    }
+    //printf("input data: \r\n");
+    //for(int i=0;i<DATA_BUFER;i++)
+    //{
+    //    printf("(%.3f,%.3f)\r\n",stimes[i],Acel[i]);
+    //}
     //Get polinimal factors
     Calculate_polynomial();
     //integrate acel
-    integrate_accel();
+    //integrate_accel();
     //integrate vel
-    integrate_vel();
+    //integrate_vel();
 
     printf("aceleracion: %.3fx^3 + %.3fx^2+ %.3fx+ %.3f\r\n",acel_vect.A,acel_vect.B,acel_vect.C,acel_vect.offset);
-    printf("velocidad:   %.3fx^4 + %.3fx^3+ %.3fx^2+ %.3fx + %.3f\r\n",vel_vect.A,vel_vect.B ,vel_vect.C ,vel_vect.D,vel_vect.offset);
-    printf("posicion:    %.3fx^5 + %.3fx^4+ %.3fx^3+ %.3fx^2 + %.3fx+%.3f\r\n",pos_vect.A , pos_vect.B , pos_vect.C , pos_vect.D , pos_vect.E , pos_vect.offset);
+    //printf("velocidad:   %.3fx^4 + %.3fx^3+ %.3fx^2+ %.3fx + %.3f\r\n",vel_vect.A,vel_vect.B ,vel_vect.C ,vel_vect.D,vel_vect.offset);
+    //printf("posicion:    %.3fx^5 + %.3fx^4+ %.3fx^3+ %.3fx^2 + %.3fx+%.3f\r\n",pos_vect.A , pos_vect.B , pos_vect.C , pos_vect.D , pos_vect.E , pos_vect.offset);
     
+    float vel_point;
+    //float pos_point;
+    for(float i=0; i < DATA_BUFER;i+=.5)
+    {
+        vel_point  = acel_vect.A*pow(i,3) + acel_vect.B*pow(i,2) + acel_vect.C + acel_vect.offset;
+        //vel_point = vel_vect.A*pow(i,4) + vel_vect.B*pow(i,3) + vel_vect.C*pow(i,2) + vel_vect.D*i+vel_vect.offset;
+        velocity_plot.push_back(vel_point);
+        time_axis.push_back(time_marks);
+        time_marks+=.5;
+    }
+
+
 }
 
 main()
-{
+{ 
     XLDocument doc2;
     doc2.open("./muestras.xlsx");
-    
+    vector<double> acelerations;
+
+    acelerations.reserve(200);
+    velocity_plot.reserve(400);
+    position_plot.reserve(400);
+    time_axis.reserve(400);
+
     auto wks2 = doc2.workbook().worksheet("5cmDERECHA");
 
-    auto PrintCell = [](const XLCell& cell) {
-        cout << "Cell type is ";
-
-        switch (cell.valueType()) {
-            case XLValueType::Empty:
-                cout << "XLValueType::Empty";
-                break;
-
-            case XLValueType::Float:
-                cout << "XLValueType::Float and the value is " << cell.value().get<double>() << endl;
-                break;
-
-            case XLValueType::Integer:
-                cout << "XLValueType::Integer and the value is " << cell.value().get<int64_t>() << endl;
-                break;
-
-            default:
-                cout << "Unknown";
-        }
-    };
     char cell_selected[5];
     int count = 1;
     float last_val = 0;
     float current_val = 0;
+
+    char interpolation_index = 0;
+    float simpsons_sum = 0;
+    float velocity_area = 0;
+    float last_area = 0;
+    char simp_index = 0;
+    int increment_time = 0;
     do
     {
         memset(cell_selected,0,sizeof(cell_selected));
@@ -156,30 +169,33 @@ main()
             if(last_val != current_val)
             {
                 last_val = current_val;
-                cout << "value is " << current_val << endl;
+                simpsons_sum += simpsons_factors[simp_index++]*current_val;
+                acelerations.push_back(current_val);
+                cout<<current_val<<", ";
+            }
+            if(simp_index == DATA_BUFER)
+            {
+                cout<<"sum"<<simpsons_sum<<endl;
+                simpsons_sum = (simpsons_sum)*3/8;
+                simpsons_sum = (simpsons_sum)*(DATA_BUFER-1)/DATA_BUFER;
+                velocity_area = simpsons_sum-.4;
+                velocity_plot.push_back(velocity_area);
+                increment_time+=DATA_BUFER;
+                time_axis.push_back(increment_time);
+                simp_index = 0;
+                simpsons_sum = 0;
+                cout<<endl;
+
             }
         }
     }while(wks2.cell(cell_selected).valueType() != XLValueType::Empty);
     
     doc2.close();
-
-    Plotdata x(-3.0, 3.0), y = sin(x) - 0.5*x;
-    plot(x, y);
-    /*
-    Acel[0] = 0.390987;
-    Acel[1] = 0.390987;
-    Acel[2] = 0.390987;
-    Acel[3] = 0.410147;
-    last_acel = Acel[3];
-    Process_data();
     
-    Acel[0] = last_acel;
-    Acel[1] = 10;
-    Acel[2] = -4;
-    Acel[3] = 0;
-    
-    last_acel = Acel[3];
-    */
+    plt::named_plot("aceleration",acelerations);
+    plt::named_plot("velocity",time_axis,velocity_plot);
+    plt::legend();
+    plt::show();
     
     return 0;
 }

@@ -100,6 +100,7 @@ Lagrange_EXTERNAL_OBJECTS =
 ../src/Lagrange: src/CMakeFiles/Lagrange.dir/build.make
 ../src/Lagrange: output/libOpenXLSX-static.a
 ../src/Lagrange: ../thirdparty/koolplot/libkoolplot.a
+../src/Lagrange: /usr/lib/x86_64-linux-gnu/libpython3.6m.so
 ../src/Lagrange: src/CMakeFiles/Lagrange.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../../src/Lagrange"
 	cd /home/tonix/Documents/ATHENAS/C_CPP_Proyects/Math/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Lagrange.dir/link.txt --verbose=$(VERBOSE)

@@ -1,1 +1,1 @@
-/usr/bin/c++ CMakeFiles/Lagrange.dir/lagrange.cpp.o -o ../../src/Lagrange  ../output/libOpenXLSX-static.a ../../thirdparty/koolplot/libkoolplot.a 
+/usr/bin/c++ CMakeFiles/Lagrange.dir/lagrange.cpp.o -o ../../src/Lagrange  ../output/libOpenXLSX-static.a ../../thirdparty/koolplot/libkoolplot.a /usr/lib/x86_64-linux-gnu/libpython3.6m.so 

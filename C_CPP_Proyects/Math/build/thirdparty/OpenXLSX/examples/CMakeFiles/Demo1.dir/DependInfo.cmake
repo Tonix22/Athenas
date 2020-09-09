@@ -17,6 +17,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../include"
   "../thirdparty/koolplot"
+  "/usr/include/python3.6"
   "../thirdparty/OpenXLSX/library"
   "../thirdparty/OpenXLSX/library/headers"
   "thirdparty/OpenXLSX/library"

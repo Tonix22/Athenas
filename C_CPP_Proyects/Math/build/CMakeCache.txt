@@ -599,6 +599,8 @@ COMPILE_HAVE_STD_REGEX:INTERNAL=TRUE
 COMPILE_HAVE_STEADY_CLOCK:INTERNAL=TRUE
 //Details about finding Git
 FIND_PACKAGE_MESSAGE_DETAILS_Git:INTERNAL=[/usr/bin/git][v2.17.1()]
+//Details about finding Python3
+FIND_PACKAGE_MESSAGE_DETAILS_Python3:INTERNAL=[/usr/include/python3.6m][/usr/lib/x86_64-linux-gnu/libpython3.6m.so][/home/tonix/.local/lib/python3.6/site-packages/numpy/core/include][cfound components: Development NumPy Interpreter Development.Module Development.Embed ][v3.6.9()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //ADVANCED property for variable: GIT_EXECUTABLE
@@ -639,4 +641,18 @@ RUN_HAVE_STEADY_CLOCK:INTERNAL=0
 THREADS_HAVE_PTHREAD_ARG:INTERNAL=TRUE
 //CMAKE_INSTALL_PREFIX during last run
 _GNUInstallDirs_LAST_CMAKE_INSTALL_PREFIX:INTERNAL=/usr/local
+_Python3_DEVELOPMENT_EMBED_SIGNATURE:INTERNAL=de5263b789f2b4fd35b356686658f937
+_Python3_DEVELOPMENT_MODULE_SIGNATURE:INTERNAL=fb81164e575e03905c1a59d8e721d837
+//Path to a program.
+_Python3_EXECUTABLE:INTERNAL=/usr/bin/python3.6
+//Path to a file.
+_Python3_INCLUDE_DIR:INTERNAL=/usr/include/python3.6m
+//Python3 Properties
+_Python3_INTERPRETER_PROPERTIES:INTERNAL=Python;3;6;9;64;m;cpython-36m-x86_64-linux-gnu;/usr/lib/python3.6;/usr/lib/python3.6;/usr/lib/python3/dist-packages;/usr/lib/python3/dist-packages
+_Python3_INTERPRETER_SIGNATURE:INTERNAL=f52291214427087aac30502e37c88f84
+//Path to a library.
+_Python3_LIBRARY_RELEASE:INTERNAL=/usr/lib/x86_64-linux-gnu/libpython3.6m.so
+_Python3_NUMPY_SIGNATURE:INTERNAL=bcfdb82e22a05630efb06a46489a7d31
+//Path to a file.
+_Python3_NumPy_INCLUDE_DIR:INTERNAL=/home/tonix/.local/lib/python3.6/site-packages/numpy/core/include
 
