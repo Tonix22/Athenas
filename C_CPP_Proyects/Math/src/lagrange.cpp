@@ -151,6 +151,8 @@ main()
     int count = 1;
     float last_val = 0;
     float current_val = 0;
+    float diff = 0;
+
 
     char interpolation_index = 0;
     float simpsons_sum = 0;
@@ -166,7 +168,9 @@ main()
         if(wks2.cell(cell_selected).valueType() == XLValueType::Float)
         {
             current_val = (float) wks2.cell(cell_selected).value().get<double>();
-            if(last_val != current_val)
+            diff = abs(current_val-last_val);
+
+            if(last_val != current_val && (diff>.03))
             {
                 last_val = current_val;
                 simpsons_sum += simpsons_factors[simp_index++]*current_val;
