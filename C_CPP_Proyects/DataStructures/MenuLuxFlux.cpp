@@ -36,7 +36,7 @@ class DispMenu
                             {idle_func,&(screens[RITH] ) },
                             {rith_func,&(screens[CIRC] ) },
                             {circ_func,&(screens[LEVEL]) },
-                            {leve_func,&(screens[WIFI] ) }, 
+                            {level_func,&(screens[WIFI] ) }, 
                             {wifi_func,&(screens[IDLE] ) },
                             {sync_func,&(screens[IDLE] ) },
                         };
@@ -73,8 +73,8 @@ void circ_func(){
     cout<<"circ_func"<<endl;
 }
 
-void leve_func(){
-    cout<<"leve_func"<<endl;
+void level_func(){
+    cout<<"level_func"<<endl;
 }
 
 void wifi_func(){
@@ -96,7 +96,7 @@ int main(int argc, char const *argv[])
     For example when a button is pressed by 3
     seconds, the fucntion call will be directly like this.
     */
-    //Menu[SYNC];// Acces directly to function
+   // Menu[SYNC];// Acces directly to function
 
 
     for(int i=0; i< ARRAYSIZE +3 ;i++)
