@@ -11,8 +11,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <stdbool.h> 
 #include <limits.h>
+#include "mit_matrix.h"
 // =====================================================================
 // DEFINE
 // =====================================================================
@@ -39,6 +39,11 @@ char max_bits_in_hash_value; // Horizontal size of Hash, N bits
 char table_size; // real table size is 2^(table size)
 int* Hash_table; // table size is pow(2,3)
 int* M;
+
+int* get_table(void)
+{
+    return Hash_table;
+}
 
 void print_binary(int var)
 {
@@ -92,7 +97,8 @@ void Generate_Hash_Matrix(int key_size,int max_input_size)
         PRINT_BIN_VALUE(M[i]);
     }
 }
-int deinit_clean_hash(void)
+
+void deinit_clean_hash(void)
 {
     free(Hash_table);
     free(M);
@@ -161,7 +167,7 @@ int Get_key(int value)
     return hash;
 }
 
-void insert_value(int value)
+bool insert_value(int value)
 {
     int key   = Get_key(value);//(value, # of bits in value,  Matrix, table_size)
     
@@ -191,11 +197,13 @@ void insert_value(int value)
         }
         else
         {
-            DEBUG_PRINT("FULL HASH");
+            printf("FULL HASH\r\n");
+            return false;
         }
     }
+    return true;
 }
-void delete(int value)
+bool delete(int value)
 {
     int key = Get_key(value);//(value, # of bits in value,  Matrix, table_size)
     int i   = 0;
@@ -206,10 +214,11 @@ void delete(int value)
         if(Hash_table[(key+i) % hash_size] == value)
         {
             Hash_table[(key+i) % hash_size] = AVAILABLE;
-            break;
+            return true;
         }
         i++;
     }
+    return false;
 }
 
 // search key has overhead on linear probing
