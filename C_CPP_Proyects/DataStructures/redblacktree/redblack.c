@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <stdbool.h>
+
 #include "redblack.h"
 
 void left_rotate(tree_t* Tree, node_t* x)

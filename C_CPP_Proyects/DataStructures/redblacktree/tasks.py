@@ -29,6 +29,6 @@ def print_banner(msg):
 def build_redblack(c):
     """ Build the shared library for the sample C code """
     print_banner("Building C Library")
-    invoke.run("gcc -c -fpic red_black.c -I /usr/include/python3.8")
-    invoke.run("gcc -shared -o tree.so red_black.o")
+    invoke.run("gcc -c -fpic redblack.c -I /usr/include/python3.8")
+    invoke.run("gcc -shared -o redblack.so redblack.o")
     print("* Complete")

@@ -1,5 +1,6 @@
 #ifndef Redblack_h
 #define Redblack_h
+#include <stdbool.h>
 
 typedef enum
 {
@@ -29,6 +30,6 @@ void create_node(node_t** z, int key);
 void destroy_node(node_t** z);
 void insertion(tree_t* Tree, node_t* z);
 void rb_insert_fixup(tree_t* Tree, node_t* z);
-
+bool find_value(tree_t* Tree,int value);
 
 #endif
