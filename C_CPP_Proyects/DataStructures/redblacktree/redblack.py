@@ -118,25 +118,38 @@ class RedBlackTree:
 
 if __name__ == "__main__":
     
+    frames = 10000
+    data_times = []
+    
     items = 1
-    for n in range (0,32):
+    for n in range (0,frames):
         Tree  = RedBlackTree()
         start_time = time.time()
         for m in range(0,items):
             Tree.insert(randint(1, 100))
-        print("--- %s seconds ---" % (time.time() - start_time))
-        items = 1<<n
-        p = Tree.tree.root.contents
+        time_len = time.time() - start_time
+        #print("--- %s seconds ---" % (time_len))
+        data_times.append(time_len)
+        items +=1
+        #p = Tree.tree.root.contents
         #Tree.InorderRecursive(p)
         #print("*"*30)
         #p = Tree.tree.root.contents
         #Tree.DeleteALL(p)
-
     
-    #x = np.arange(0, math.pi*2, 0.05)
-    #y = np.sin(x)
-    #plt.plot(x,y)
-    #plt.show()
+    x=np.arange(frames)
+    
+    fig=plt.figure()
+    ax=fig.add_subplot(111)
+    
+    ax.plot(x,np.log2(x)/256,'C1',label='logarithmic')
+    ax.plot(x,np.array(data_times),'C2',label='insertions')
+    
+    plt.legend(loc=2)
+
+
+    plt.show()
+
     #print(Tree.tree.root.contents.key)
     #print(Tree.tree.root.contents.right.contents.key)
     #print(Tree.tree.root.contents.left.contents.key)
