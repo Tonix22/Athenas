@@ -62,22 +62,31 @@ void erase_node(int val)
 {
     Node* iterator = NULL;
     Node* temp     = NULL;
-    if(find(val,&iterator))
+    bool found     = find(val,&iterator);
+    //printf("found: %d", found);
+    if(found == true)
     {
         while(iterator != NULL)
         {
+            //printf("iterator: %p\r\n",iterator);
             temp     = iterator;
             iterator = iterator->down;
 
+            //printf("unlink: \r\n");
             unlink_node(temp);
 
             //delete level if needed it
             if(temp->right->val == INT_MAX && temp->left->val == INT_MIN)
             {
+                //printf("del lvl\r\n");
                 delete_level(temp);
+                if(temp == NULL)
+                    break;
             }
+            //printf("delete node \r\n");
             delete_node(&temp);
         }
+        //printf("END LOOP\r\n");
     }
 }
 

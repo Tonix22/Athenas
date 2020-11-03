@@ -35,26 +35,57 @@ if __name__ == "__main__":
 
     c_lib.init_structure()
     
-    frames = 1000
-    data_times = []
-    i = 0
-    
-    for n in range (0,frames):
-        val = randint(1, 1000)
-        #print (val)
-        start_time = time.time()
+    frames_number= 10000
+    insert_times=[]
+    search_times=[]
+    delete_times=[]
+    frames=[]
 
-        c_lib.insert(val)
+	
+    for n in range (0,frames_number):
+        #generate frames
+        for m in range(0,n):
+            val = randint(1, (1<<31)-1)
+            frames.append(val)
+        
+        #insertions
+        start_time = time.time()
+        for m in range(0,n):
+            c_lib.insert(frames[m])
+        
         time_len = time.time() - start_time
-        time.sleep(.01)
-        data_times.append(time_len)
-    
-    x=np.arange(frames)
+        insert_times.append(time_len)
+        #searches
+        frames_len = len(frames)-1
+        start_time = time.time()
+        for m in range(0,n):
+            val = frames[randint(0, frames_len)]
+            c_lib.find_value(val)
+        
+        time_len = time.time() - start_time
+        search_times.append(time_len)
+        
+        
+        #delete
+        start_time = time.time()
+        for m in range(1,n):
+            #print("frames[%4d] = % 4d" %(m, frames[m]))
+            c_lib.erase_node(frames[m])
+
+        time_len = time.time() - start_time
+        delete_times.append(time_len)
+        
+        frames.clear()
+        print("iteration = % 4d" %(n))
+
+	
+    x=np.arange(frames_number)
     fig=plt.figure()
-    ax=fig.add_subplot(111)
-    
-    ax.plot(x,np.array(data_times),'C2',label='insertions')
-    
+    ax=fig.add_subplot(111)      
+    ax.plot(x,np.array(insert_times),'C2',label='insertions')
+    ax.plot(x,np.array(search_times),'C0',label='search')
+    ax.plot(x,np.array(delete_times),'C3',label='delete')
+      
     plt.legend(loc=2)
 
     plt.show()

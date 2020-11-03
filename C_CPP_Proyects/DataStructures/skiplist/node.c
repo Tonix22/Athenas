@@ -15,6 +15,8 @@ void delete_node(Node** temp)
 {
     (*temp)->left  = NULL;
     (*temp)->right = NULL;
+    (*temp)->up    = NULL;
+    (*temp)->down  = NULL;
     free(*temp);
     *temp = NULL;  
 }

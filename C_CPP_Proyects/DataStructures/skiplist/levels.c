@@ -9,12 +9,12 @@ char flip_coin(void)
     static int rd;
     static char val;
     bit%=31;
-    srand(time(0));
     if(bit == 0)
     {
+        srand(clock());
         rd =  rand();
         //rd = 0x77F;
-        printf("rd: %X\r\n",rd);
+        //printf("rd: %X\r\n",rd);
     }
     val = (rd&1<<bit)>>bit++;
     //printf("%s\r\n",val?("Sello"):("Aguilla"));
@@ -27,25 +27,31 @@ void create_level(Node** level_head)
     (*level_head)->val        = INT_MIN;
     (*level_head)->right      = malloc(sizeof(Node));
     (*level_head)->right->val = INT_MAX;
-    (*level_head)->up = NULL;
+    (*level_head)->up   = NULL;
+    (*level_head)->down = NULL;
+
 }
 void delete_level(Node* temp)
 {
     Node* lvl_del  = NULL;
-    lvl_del = temp->right;
-    lvl_del->left = NULL;
-    free(lvl_del);
-    lvl_del = NULL;
-
-    lvl_del  = temp -> left;
-    if(lvl_del->down !=NULL)
+    if(temp->left->down !=NULL)
     {
+        lvl_del = temp->right;
+        lvl_del->left = NULL;
+        free(lvl_del);
+        lvl_del = NULL;
+
+        lvl_del  = temp -> left;
         Head     = lvl_del-> down;
         Head->up = NULL;
         lvl_del->down = NULL;
         free(lvl_del);
         lvl_del = NULL;
+    }else
+    {
+        Head = temp->left;
     }
+    
 }
 
 
