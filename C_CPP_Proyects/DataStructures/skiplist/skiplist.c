@@ -81,26 +81,17 @@ void erase_node(int val)
     }
 }
 
-
+/*
+    gcc -g -fpic -c skiplist.c node.c levels.c -I /usr/include/python3.6
+    ld -relocatable levels.o node.o skiplist.o -o skip.o
+    gcc -shared -o skiplist.so skip.o
+*/
 
 int main(int argc, char const *argv[])
 {
     init_structure();
-    insert(2);
-    insert(18);
-    insert(5);
-    insert(7);
-    insert(10);
+    insert(493);
+    insert(599);
 
-    Node* it;
-    find(18,&it);
-    find(17,&it);
-    printf("it->val: %d\r\n",it->val);
-    
-    erase_node(10);
-    erase_node(2);
-    erase_node(18);
-    erase_node(5);
-    erase_node(7);
     return 0;
 }
