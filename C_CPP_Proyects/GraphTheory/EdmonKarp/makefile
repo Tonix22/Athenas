@@ -1,0 +1,2 @@
+hellomake: main.cpp
+	g++ main.cpp EdmonKarp.cpp -std=c++11 -I/usr/include/python3.8 -I/usr/local/lib/python3.8/site-packages/numpy/core/include -lpython3.8 -lpthread -lutil -ldl -Xlinker -export-dynamic

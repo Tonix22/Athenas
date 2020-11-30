@@ -1,178 +1,104 @@
 #include <iostream>
-#include <queue>
+#include <chrono>
+#include <algorithm> 
+#include <vector> 
+#include <ratio>
+#include <ctime> 
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+#include "EdmonKarp.h"
+#include "helper.h"
+#include "matplotlibcpp.h"
 
 
-typedef enum
+using namespace std::chrono; 
+namespace plt = matplotlibcpp;
+
+#define FRAMES 500
+
+std::vector<float> Y_axis;
+std::vector<int> X_axis;
+std::chrono::duration<double, std::milli> it_ms; 
+
+void Test_grid(int ROWS, int COLS)
 {
-    Black,
-    White
-}Node_Color;
+    CREATE_2D_ARR(GRID);
+    Node_Color rand_color ;
+    int blacks = 0;
+    int black_max = (ROWS*COLS)/3;
+    int density = 0;
+    int space = 4;
 
-
-class Grid_Edge
-{
-    public:
-        Grid_Edge(){}
-        Grid_Edge(Node_Color Black_white)
-        {
-            this->color = Black_white;
-        }
-        Node_Color color;
-        char capacity  = 1;
-        char flow = 0;
-        Grid_Edge* parent = NULL;
-        bool visited      = false;
-        int x = 0;
-        int y = 0;
-        void coordinates(int row,int col)
-        {
-            this->x = col;
-            this->y = row;
-        }
-};
-
-#define grid_rows 6
-#define y_size grid_rows
-
-#define grid_cols 6
-#define x_size grid_cols
-
-#define IS_CANDIDATE() neighbour->capacity !=0 && neighbour!=V->parent && neighbour->visited == false && neighbour->color!=Black
-
-#define REGISTER_CANDIDATE() neighbour->parent  = V;\
-                             neighbour->visited = true;\
-                             Neighborhood.push(neighbour);
-        
-
-
-Grid_Edge grid [grid_rows][grid_cols]=
-{
-    {Grid_Edge(White),Grid_Edge(White),Grid_Edge(White),Grid_Edge(White),Grid_Edge(White),Grid_Edge(White)},
-    {Grid_Edge(White),Grid_Edge(Black),Grid_Edge(White),Grid_Edge(Black),Grid_Edge(White),Grid_Edge(Black)},
-    {Grid_Edge(Black),Grid_Edge(Black),Grid_Edge(White),Grid_Edge(Black),Grid_Edge(Black),Grid_Edge(Black)},
-    {Grid_Edge(White),Grid_Edge(Black),Grid_Edge(White),Grid_Edge(Black),Grid_Edge(White),Grid_Edge(Black)},
-    {Grid_Edge(White),Grid_Edge(White),Grid_Edge(White),Grid_Edge(White),Grid_Edge(White),Grid_Edge(White)},
-    {Grid_Edge(White),Grid_Edge(White),Grid_Edge(White),Grid_Edge(White),Grid_Edge(White),Grid_Edge(White)},
-};
-
-bool shore(int row,int col)
-{
-    if(row == (grid_rows-1) 
-    || col == (grid_cols-1)
-    || row == 0
-    || col == 0)
+    for(int i=0;i<ROWS;i++)
     {
-        return true;
-    }
-    return false;
-}
-
-void Explore_Neighborhood(Grid_Edge* V, std::queue<Grid_Edge*>& Neighborhood)
-{
-    Grid_Edge* neighbour;
-    int next_x = (V->x)+1;
-    int next_y = (V->y)+1;
-    int prev_x = (V->x)-1;
-    int prev_y = (V->y)-1;
-
-    if(next_x != x_size )
-    {
-        neighbour = &(grid[V->y][next_x]);
-        neighbour->coordinates(V->y,next_x);
-        if(IS_CANDIDATE()){
-            REGISTER_CANDIDATE();
-        }
-    }
-    if(next_y != y_size )
-    {
-        neighbour = &(grid[next_y][V->x]);
-        neighbour->coordinates(next_y,V->x);
-        if(IS_CANDIDATE()){
-            REGISTER_CANDIDATE();
-        }
-    }
-    if(prev_x >= 0 )
-    {
-        neighbour = &(grid[V->y][prev_x]);
-        neighbour->coordinates(V->y,prev_x);
-        if(IS_CANDIDATE()){
-            REGISTER_CANDIDATE();
-        }
-    }
-    if(prev_y >= 0)
-    {
-        neighbour = &(grid[prev_y][V->x]);
-        neighbour->coordinates(prev_y,V->x);
-        if(IS_CANDIDATE()){
-            REGISTER_CANDIDATE();
-        }
-    }
-}
-
-bool Edmon_karp(void)
-{
-    Grid_Edge* V;
-    Grid_Edge* T;
-    std::queue<Grid_Edge*> Neighborhood;
-    for(int i=0;i<6;i++)
-    {
-        for(int j=0;j<6;j++)
-        {
-            V = &(grid[i][j]);
-            V->coordinates(i,j);
-            if(V->color == Black)
+        for (int j = 0; j < COLS; j++)
+        {   
+            if(blacks <= black_max && density == 0)
             {
-                V->capacity  = 1;
-                Explore_Neighborhood(V,Neighborhood);
-                V->capacity = Neighborhood.size();
-                if(V->capacity == 0 && !shore(V->y,V->x))
+                rand_color = (Node_Color)(rand()&1);
+                if(rand_color == Black)
                 {
-                    return false;
-                }
-                while(V->capacity!=0 && !Neighborhood.empty())
-                {
-                    T = Neighborhood.front();
-                    Neighborhood.pop();
-                    if(!shore(T->y,T->x))
-                    {
-                        Explore_Neighborhood(T,Neighborhood);
-                    }
-                    else
-                    {
-                        while(T!=V)
-                        {
-                            T->flow      = 1;
-                            T->capacity  = 0;
-                            T->visited   = false;
-                            T = T->parent;
-                        }
-                        T->flow++;
-                        T->capacity--;
-                    }
-                }
-                //EMPTY QUEUE
-                while (!Neighborhood.empty())
-                {
-                    V = Neighborhood.front();
-                    while (V->visited == true) // clean backtracing
-                    {
-                        V->visited = false;
-                        T = V->parent;
-                        V = T;
-                        T = NULL;
-                    }
-                    Neighborhood.pop();
+                    blacks++;
+                    density++;
                 }
             }
-            
+            else
+            {
+                rand_color = White;
+                if(density > 0)
+                {
+                    density++;
+                    density %=space;
+                }
+            }
+            GRID[i][j] = Grid_Edge(rand_color);
         }
     }
-    return true;
+    //PRINT_MATRIX(GRID);
+
+    // Get starting timepoint 
+    std::chrono::time_point<std::chrono::system_clock> start, end; 
+    start = std::chrono::system_clock::now(); 
+
+    bool scape = Edmon_karp(GRID,ROWS,COLS);
+
+    end = std::chrono::system_clock::now();
+
+    std::chrono::duration<double, std::milli> fp_ms = end - start;
+    it_ms+=fp_ms;
+    
+    //printf("scape: %d \r\n",scape);
+
+    DESTROY_2D_ARR(GRID);
 }
+
 
 
 int main(int argc, char const *argv[])
 {
-    Edmon_karp();
+    srand (time(NULL));
+
+    for(int i=0;i<FRAMES;i++)
+    {
+        X_axis.push_back(i);
+    }
+
+
+    for(int i=1;i <= FRAMES;i++)
+    {
+        it_ms.zero();
+        std::cout<<"Frame number: "<<i<<std::endl;
+        for (int j = 1; j <= i; j++)
+        {
+            Test_grid(i,j);
+        }
+        std::cout << "Test_grid took " << it_ms.count() << " ms, " <<std::endl;
+        Y_axis.push_back(it_ms.count());
+    }
+    
+    plt::plot(X_axis, Y_axis);
+    plt::show();
+
+
     return 0;
 }
