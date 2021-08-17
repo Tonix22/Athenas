@@ -12,12 +12,9 @@ char flip_coin(void)
     if(bit == 0)
     {
         srand(clock());
-        rd =  rand();
-        //rd = 0x77F;
-        //printf("rd: %X\r\n",rd);
+        rd =  rand(); // 0--2^32 45633432342 = 101010101111010101
     }
     val = (rd&1<<bit)>>bit++;
-    //printf("%s\r\n",val?("Sello"):("Aguilla"));
     return val;
 }
 

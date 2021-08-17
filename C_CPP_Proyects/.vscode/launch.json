@@ -4,12 +4,11 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-    
         {
-            "name": "(gdb) Launch",
+            "name": "gcc-7 - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/C_CPP_Proyects/GraphTheory/EdmonKarp/a.out",
+            "program": "${workspaceFolder}/C_CPP_Proyects/Advance_desings_and_analysis_techniques/dynamic_programming/a.out",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
@@ -22,7 +21,9 @@
                     "text": "-enable-pretty-printing",
                     "ignoreFailures": true
                 }
-            ]
+            ],
+            //"preLaunchTask": "gcc ${workspaceFolder}/DataStructures/redblack.c -g -o ${workspaceFolder}/DataStructures/redblack",
+            "miDebuggerPath": "/usr/bin/gdb"
         }
     ]
 }

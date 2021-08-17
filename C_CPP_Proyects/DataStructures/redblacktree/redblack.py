@@ -118,16 +118,21 @@ class RedBlackTree:
 
 if __name__ == "__main__":
     
-    frames = 10000
-    data_times = []
+    frames = 100
+    values = []
+    for n in range (0,frames):
+        values.append(randint(1, 1<<31))
     
     items = 1
     for n in range (0,frames):
         Tree  = RedBlackTree()
-        start_time = time.time()
+
+        start_time = time.time() ### <--presiona boton
+
         for m in range(0,items):
             Tree.insert(randint(1, 100))
-        time_len = time.time() - start_time
+            
+        time_len = time.time() - start_time ### <--presiona boton
         #print("--- %s seconds ---" % (time_len))
         data_times.append(time_len)
         items +=1
