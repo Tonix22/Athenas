@@ -7,8 +7,6 @@ typedef enum {
     DONA,
     CONCHA,
     BOLILLO
-
-
 }pan_enum_t;
 
 
@@ -38,7 +36,7 @@ class Bolillo : public Bakery{
     public:
     string bake() const override 
     {
-        return "This is a Bolillou";
+       return "This is a Bolillou"; 
     }
 };
 
@@ -122,7 +120,7 @@ class BorraDelCafe : public AbstractFactory{
 
 void ClientCode(const AbstractFactory &factory) {
 
-  const Bakery * panecito = factory.CreatePanecito();
+  const Bakery     * panecito = factory.CreatePanecito();
   const CoffeeShop * cafecito = factory.CreateBebida();
   
   std::cout << panecito->bake() << "\n";
@@ -130,7 +128,6 @@ void ClientCode(const AbstractFactory &factory) {
   std::cout << cafecito->Combo(*panecito) << "\n";
   delete panecito;
   delete cafecito;
-  
 }
 
     
@@ -168,6 +165,9 @@ int main(int argc, char const *argv[])
     
     Starbucks *experiencia = new Starbucks();
     ClientCode(*experiencia);
+
+    Starbucks *caro = new Starbucks();
+    
     delete experiencia;
 
     std::cout << std::endl;
