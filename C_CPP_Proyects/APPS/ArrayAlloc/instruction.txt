@@ -1,0 +1,34 @@
+
+/*
+Recursion 
+
+Check palindrome using recursion 
+
+Find factorial using recursion 
+
+Generate nth Fibonacci term using recursion 
+
+Array 
+
+Input and display array elements 
+
+Sum of all array elements 
+
+Find second largest element in array 
+
+Copy one array to another 
+
+Insert new element in array 
+
+Delete an element from array 
+
+Merge two array to third array 
+
+Delete duplicate elements from array 
+
+Reverse an array 
+
+Search an element in array 
+
+Sort an array 
+*/
