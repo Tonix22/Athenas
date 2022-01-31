@@ -8,7 +8,7 @@
             "name": "gcc-7 - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/C_CPP_Proyects/Advance_desings_and_analysis_techniques/dynamic_programming/a.out",
+            "program": "/home/tonix/HardDisk/Documents/Athenas/C_CPP_Proyects/excersises/a.out",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
