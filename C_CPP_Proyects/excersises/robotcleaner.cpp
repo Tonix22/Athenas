@@ -1,5 +1,7 @@
 #include <iostream>
-#include <string> 
+#include <string>
+#include <stdint.h>
+
 using namespace std;
 
 /*
@@ -23,10 +25,9 @@ typedef enum
     BACK = -1,
 }State;
 
-int   steps   = 0;
-int state_x = 1;
-int state_y = 1;
-    
+int     steps   = 0;
+int32_t state_x = 1;
+int32_t state_y = 1;
 
 inline void whereIsMyStar(Grid& Board,Object& Robot, Object& Star){
     steps   = 0;
@@ -37,11 +38,11 @@ inline void whereIsMyStar(Grid& Board,Object& Robot, Object& Star){
     {
         if(Robot.x >= Board.x || Robot.x <= 0)
         {
-            state_x *=-1;
+            state_x =~state_x;
         }
         if(Robot.y >= Board. y ||  Robot.y <= 0)
         {
-            state_y *=-1;
+            state_y =~state_y;
         }
         Robot.x+=state_x;
         Robot.y+=state_y;
