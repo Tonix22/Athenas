@@ -19,46 +19,32 @@ typedef struct Object_t{
 
 typedef enum
 {
-    FORWARD,
-    BACK,
+    FORWARD = 1,
+    BACK = -1,
 }State;
 
 int   steps   = 0;
-State state_x = FORWARD;
-State state_y = FORWARD;
-
-void whereIsMyStar(Grid& Board,Object& Robot, Object& Star){
-    steps   = 0;
-    state_x = FORWARD;
-    state_y = FORWARD;
+int state_x = 1;
+int state_y = 1;
     
+
+inline void whereIsMyStar(Grid& Board,Object& Robot, Object& Star){
+    steps   = 0;
+    state_x = 1;
+    state_y = 1;
+
     while (Robot.x != Star.x && Robot.y != Star.y)
     {
-        
-        if(state_x == FORWARD)
-        {
-            Robot.x++;
-        }
-        else if(state_x == BACK)
-        {
-            Robot.x--;
-        }
         if(Robot.x >= Board.x || Robot.x <= 0)
         {
-            state_x = (State)(state_x^1);
-        }
-        if(state_y == FORWARD)
-        {
-            Robot.y++;
-        }
-        else if(state_y == BACK)
-        {
-            Robot.y--;
+            state_x *=-1;
         }
         if(Robot.y >= Board. y ||  Robot.y <= 0)
         {
-            state_y = (State)(state_x^1);
+            state_y *=-1;
         }
+        Robot.x+=state_x;
+        Robot.y+=state_y;
         steps ++;
     }
     cout<<steps<<endl;
