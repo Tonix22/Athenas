@@ -38,11 +38,11 @@ inline void whereIsMyStar(Grid& Board,Object& Robot, Object& Star){
     {
         if(Robot.x >= Board.x || Robot.x <= 0)
         {
-            state_x =~state_x;
+            state_x *=-1;
         }
         if(Robot.y >= Board. y ||  Robot.y <= 0)
         {
-            state_y =~state_y;
+            state_y *=-1;
         }
         Robot.x+=state_x;
         Robot.y+=state_y;
