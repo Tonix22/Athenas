@@ -61,7 +61,6 @@ void sort_vector_Ruth(vector<int>& A)
 
 int main(int argc, char const *argv[])
 {
-                              
     vector<int> A={4,5,7,1,6};
     A.push_back(2); // append
     A.pop_back();   //remove
