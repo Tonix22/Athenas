@@ -1,4 +1,6 @@
 
+#include "common.h"
+
 void radix_sort(std::vector<int>& values,int bit_size)
 {
     for(int b_size = 0; b_size<bit_size; b_size++)
@@ -17,10 +19,11 @@ void radix_sort(std::vector<int>& values,int bit_size)
                 zeros.push_back(v);
             }
         }
-        values.clear();
+        values.clear(); // update
         //pegar el de ceros
         values.insert(values.end(),zeros.begin(),zeros.end());
         //pegar el de unos
         values.insert(values.end(),ones.begin(), ones.end());
     }
+    
 }

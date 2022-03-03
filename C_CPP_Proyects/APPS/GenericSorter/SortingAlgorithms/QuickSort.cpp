@@ -1,3 +1,6 @@
+
+#include "common.h"
+
 vector<int>::iterator find_insert_pos(vector <int>& B,int valor)
 {
     vector<int>::iterator inicio = B.begin(); 
@@ -35,7 +38,7 @@ void fastest_sort(vector <int>& A)
     {
         item  = A.back();
 
-        half = find_insert_pos(B,item);//interfaz
+        half = find_insert_pos(B,item);//interfaz // search
 
         if (*half < item) 
             B.insert (half+1,item);

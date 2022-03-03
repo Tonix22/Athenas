@@ -1,13 +1,16 @@
 
-void sort_vector_Ruth(vector<int>& A)
+#include "BubbleSort.h"
+#include <algorithm>
+
+void BubbleSort(vector<int>& A)
 {
     vector<int> B;
     vector<int>::iterator result;
     while(!A.empty())
     {
-        result = std::min_element(A.begin(), A.end());
-        B.push_back(*result);
-        A.erase(result);
+        result = std::min_element(A.begin(), A.end()); // serach
+        B.push_back(*result); // Move
+        A.erase(result); // move
     }
-    A = B;
+    A = B; // update
 }
