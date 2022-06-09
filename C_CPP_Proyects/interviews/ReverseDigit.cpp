@@ -36,9 +36,9 @@ int main(int argc, char const *argv[])
     //iterator
     
     //for(string::iterator i= s.end(); i >= s.begin(); --i){
-    //    //print result
+    //    print result
     //    printf("%c",*i );
-    //    //cout << *i <<endl;
+    //    cout << *i <<endl;
     //}
     //cout<<endl;
     //for(string::reverse_iterator i=s.rbegin();i!=s.rend();i++)

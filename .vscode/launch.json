@@ -4,12 +4,13 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
     
         {
             "name": "g++ - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/tonix/HardDisk/Documents/Athenas/C_CPP_Proyects/excersises/a.out",
+            "program": "/home/tonix/HardDisk/Documents/Athenas/C_CPP_Proyects/Threads/hellow.out",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${fileDirname}",

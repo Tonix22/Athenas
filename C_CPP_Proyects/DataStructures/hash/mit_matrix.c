@@ -68,7 +68,7 @@ Each M[i] it could be seen as a bidimensional matrix
 
         ----------> 4 bits width
         [ 1 0 0 1 ] |
-    M = | 0 1 1 1 | | 3 Hight
+    M = | 0 1 1 1 | | 3 Height
         [ 1 1 1 0 ] |
 
     Hash_table [8]; A has table of size two_power(3)
@@ -244,7 +244,7 @@ int main(int argc, char const *argv[])
     /*NOTE:
         Review birthday paradox to calc probability of collision
     */
-    int t_size_in_bits  = 3; // MAX BITS OF HASH TABLE IS 30 bits 
+    int t_size_in_bits  = 3;  // MAX BITS OF HASH TABLE IS 30 bits 
     char data_bit_size  = 4;  // DATA INPUT SIZE
 
     Generate_Hash_Matrix(t_size_in_bits,data_bit_size);//table size, max bits input value
