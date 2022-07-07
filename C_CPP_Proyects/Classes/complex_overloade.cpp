@@ -9,7 +9,6 @@ namespace std
         public:
         Dual(double real, double imag): complex(real,imag)  
         {}
-        
     };
 
 
@@ -40,7 +39,7 @@ int main(int argc, char const *argv[])
 {
     std::complex<double> a(2,3);
     std::complex<double> b(5,7);
-    std::Dual d(3,1); // 3*3+ 2*3*1 i +-1 
+    std::Dual d(3,1); 
     
     //std::Dual res = d*d+2*d+3;
     //std::cout<<pow(d, 2)<<std::endl;
