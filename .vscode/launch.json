@@ -11,7 +11,7 @@
             "name": "g++ - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/home/tonix/HardDisk/Documents/Athenas/C_CPP_Proyects/Cointainers/a.out",
+            "program": "/home/tonix/HardDisk/Documents/Athenas/C_CPP_Proyects/Threads/a.out",
             "args": [],
             "stopAtEntry": true,
             "cwd": "${fileDirname}",

@@ -29,9 +29,10 @@ void* lasvegas(void *vargp)
     return NULL;
 }
 
-void* bar(void *vargp)
+void* bar(void *vargp) // escribe en el pipe
 {
     int a = 0;
+    a = 1/0; // excpetion
     
     while(USB_CONNECTED != a)
     {
@@ -66,7 +67,6 @@ int main(int argc, char const *argv[])
     pthread_join(thread_id, NULL); // esperar a que el thread termine
     pthread_join(thread_id2, NULL);
     printf("After Thread\n");
-    return 0;
 
 
     return 0;
