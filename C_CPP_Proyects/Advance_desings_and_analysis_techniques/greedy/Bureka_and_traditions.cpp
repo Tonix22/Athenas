@@ -8,14 +8,14 @@ void bureka_algorithm()
     int t = 0;
     //N test cases
     cin >> t;
-
+    
     while(t--)
     {
         int n = 0;
         //n elements per test case
         cin >> n;
         int* arr = new int[n];
-
+        
         //Recieved elements
         for(int i = 0; i < n; ++i)
             cin >> arr[i];
