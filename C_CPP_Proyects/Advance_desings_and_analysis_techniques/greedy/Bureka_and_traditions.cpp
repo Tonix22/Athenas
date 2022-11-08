@@ -29,12 +29,15 @@ void bureka_algorithm()
             //cout<< arr[i]<<", ";
         }
         //cout<<endl;
-        repeated.insert(0);
-
+        
         //Remove repeated elements that may be cleared with XOR
         for(int i = 0; i < n; ++i)
         {
-            if(repeated.find(arr[i]) != repeated.end()){
+            if(arr[i] == 0) {
+                count_zero++;
+                continue;
+            }
+            else if(repeated.find(arr[i]) != repeated.end()) {
                 count_zero++;
                 repeated.clear();
             }
